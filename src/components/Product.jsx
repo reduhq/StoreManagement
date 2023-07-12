@@ -1,14 +1,30 @@
 
 const Product = ({
-    productName,
-    productPrice,
-    productQuantity
+    productList
 }) =>{
     return(
         <div>
-            <p>{productName}</p>
-            <p>{productPrice}</p>
-            <p>{productQuantity}</p>
+            <h2>Lista De Productos</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre Producto</th>
+                        <th>Precio Producto</th>
+                        <th>Cantidad Producto</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {productList.map( product =>(
+                        <tr key={product.id}>
+                            <td>{product.product_name}</td>
+                            <td>{product.price}</td>
+                            <td>{product.quantity}</td>
+                        </tr>
+                    ) )}
+                </tbody>
+            </table>
         </div>
     )
 }

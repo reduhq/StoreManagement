@@ -25,14 +25,7 @@ const Products = () =>{
                 {request.length === 0 ?(
                     <p>No Hay Productos</p> 
                 ):(
-                    request.map( product =>(
-                        <Product
-                            key={product.id}
-                            productName={product.product_name}
-                            productPrice={product.price}
-                            productQuantity={product.quantity}
-                        />
-                    ))
+                    <Product productList={request}/>
                 )}
             </div>
         </>
