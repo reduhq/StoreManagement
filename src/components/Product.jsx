@@ -1,8 +1,19 @@
 import styles from './../styles/Products.module.css'
+import { useState } from 'react'
 
 const Product = ({
-    productList
+    productList,
+    searchProduct
 }) =>{
+    let products = productList
+
+    if(searchProduct !== ''){
+        products = products.filter(product => product.product_name.toLowerCase().includes(searchProduct.toLowerCase()))
+        if(!products){
+            products = []
+        }
+    }
+
     return(
         <div className={styles.container}>
             <h2>Lista De Productos</h2>
@@ -17,7 +28,7 @@ const Product = ({
                 </thead>
 
                 <tbody>
-                    {productList.map( product =>(
+                    {products.map( product =>(
                         <tr key={product.id}>
                             <td>{product.product_name}</td>
                             <td>{product.price}</td>
