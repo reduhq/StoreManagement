@@ -1,9 +1,10 @@
+import styles from './../styles/Products.module.css'
 
 const Product = ({
     productList
 }) =>{
     return(
-        <div>
+        <div className={styles.container}>
             <h2>Lista De Productos</h2>
 
             <table>
