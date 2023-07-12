@@ -1,6 +1,8 @@
-import { useEffect } from 'react' 
+import { useEffect, useState } from 'react' 
+import Product from './../components/Product'
 
 const Products = () =>{
+    const [request, setRequest] = useState([])
     useEffect(() =>{
         prod()
     }, [])
@@ -10,14 +12,30 @@ const Products = () =>{
         try{
             const response = await fetch(url)
             const r = await response.json()
-            console.log(r)
+            setRequest(r)
         }catch(e){
             console.log('error', e)
         }
     }
 
     return(
-        <h1>Productos</h1>
+        <>
+            <h1>Productos</h1>
+            <div>
+                {request.length === 0 ?(
+                    <p>No Hay Productos</p> 
+                ):(
+                    request.map( product =>(
+                        <Product
+                            key={product.id}
+                            productName={product.product_name}
+                            productPrice={product.price}
+                            productQuantity={product.quantity}
+                        />
+                    ))
+                )}
+            </div>
+        </>
     )
 }
 
