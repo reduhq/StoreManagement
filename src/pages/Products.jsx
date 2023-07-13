@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react' 
 import Product from './../components/Product'
 import './../styles/Products.css'
+import AddProductList from '../components/AddProductList'
+import ModalAddProduct from '../components/ModalAddProduct'
 
 const Products = () =>{
     const [request, setRequest] = useState([])
     const [searchProductText, setSearchProductText] = useState('')
+    const [addProduct, setAddProduct] = useState({})
+    const [addProductList, setAddProductList] = useState([])
 
     useEffect(() =>{
         prod()
@@ -20,9 +24,16 @@ const Products = () =>{
             console.log('error', e)
         }
     }
-    
+    console.log(addProductList)
     return(
         <div className='container'>
+            <ModalAddProduct 
+                product={addProduct}
+                setAddProduct={setAddProduct}
+                ProductList={addProductList}
+                setAddProductList={setAddProductList}
+            />
+
             <h1>Productos</h1>
             <input 
                 className='txtSearchProductos'
@@ -39,6 +50,16 @@ const Products = () =>{
                     <Product 
                         productList={request}
                         searchProduct={searchProductText}
+                        setAddProduct={setAddProduct}
+                    />
+                )}
+            </div>
+            <div>
+                {Object.keys(addProduct).length === 0 ?(
+                    <p>No hay Productos Agregados</p>
+                ):(
+                    <AddProductList 
+                        product={addProduct}
                     />
                 )}
             </div>

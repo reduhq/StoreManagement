@@ -3,7 +3,8 @@ import { useState } from 'react'
 
 const Product = ({
     productList,
-    searchProduct
+    searchProduct,
+    setAddProduct
 }) =>{
     let products = productList
 
@@ -12,6 +13,10 @@ const Product = ({
         if(!products){
             products = []
         }
+    }
+
+    const addProduct = (product) =>{
+        setAddProduct(product)
     }
 
     return(
@@ -33,6 +38,7 @@ const Product = ({
                             <td>{product.product_name}</td>
                             <td>{product.price}</td>
                             <td>{product.quantity}</td>
+                            <td><button onClick={()=>addProduct(product)}>Agregar</button></td>
                         </tr>
                     ) )}
                 </tbody>
