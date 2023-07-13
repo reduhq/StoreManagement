@@ -9,6 +9,7 @@ const Products = () =>{
     const [searchProductText, setSearchProductText] = useState('')
     const [addProduct, setAddProduct] = useState({})
     const [addProductList, setAddProductList] = useState([])
+    const [removeProduct, setRemoveProduct] = useState(false)
 
     useEffect(() =>{
         prod()
@@ -24,15 +25,18 @@ const Products = () =>{
             console.log('error', e)
         }
     }
-    console.log(addProductList)
+    
     return(
         <div className='container'>
-            <ModalAddProduct 
+            {Object.keys(addProduct).length !== 0 && 
+                <ModalAddProduct 
                 product={addProduct}
                 setAddProduct={setAddProduct}
                 ProductList={addProductList}
                 setAddProductList={setAddProductList}
-            />
+                removeProduct={removeProduct}
+                setRemoveProduct={setRemoveProduct}
+            />}
 
             <h1>Productos</h1>
             <input 
@@ -60,6 +64,8 @@ const Products = () =>{
                 ):(
                     <AddProductList 
                         products={addProductList}
+                        setAddProduct={setAddProduct}
+                        setRemoveProduct={setRemoveProduct}
                     />
                 )}
             </div>

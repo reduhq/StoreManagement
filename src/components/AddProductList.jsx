@@ -1,7 +1,15 @@
 
 const AddProductList = ({
-    products
+    products,
+    setAddProduct,
+    setRemoveProduct
 }) =>{
+
+    const btnEliminarClick = (product) =>{
+        setAddProduct(product)
+        setRemoveProduct(true)
+    }
+    
     return(
         <>
             <h2>Lista de Productos Agregados</h2>
@@ -20,7 +28,7 @@ const AddProductList = ({
                             <td>{product.product_name}</td>
                             <td>{product.price}</td>
                             <td>{product.quantity}</td>
-                            <td><button>Eliminar</button></td>
+                            <td><button onClick={()=>btnEliminarClick(product)}>Eliminar</button></td>
                         </tr>
                     ) )}
                 </tbody>
