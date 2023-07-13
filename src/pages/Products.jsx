@@ -55,11 +55,11 @@ const Products = () =>{
                 )}
             </div>
             <div>
-                {Object.keys(addProduct).length === 0 ?(
+                {Object.keys(addProductList).length === 0 ?(
                     <p>No hay Productos Agregados</p>
                 ):(
                     <AddProductList 
-                        product={addProduct}
+                        products={addProductList}
                     />
                 )}
             </div>
