@@ -1,18 +1,32 @@
 import styles from './../styles/Products.module.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const Product = ({
-    productList,
     searchProduct,
     setAddProduct
 }) =>{
-    let products = productList
+    const [ProductList, setProductList] = useState([])
+    let products= []
 
-    if(searchProduct !== ''){
-        products = products.filter(product => product.product_name.toLowerCase().includes(searchProduct.toLowerCase()))
-        if(!products){
-            products = []
+    useEffect(() =>{
+        getProducts()
+    }, [])
+    
+    const getProducts = async () =>{
+        const url = 'http://127.0.0.1:8000/api/v1/product/' 
+        try{
+            const response = await fetch(url)
+            const r = await response.json()
+            setProductList(r)
+        }catch(e){
+            console.log('error', e)
         }
+    }
+    
+    if(searchProduct !== ''){
+        products = ProductList.filter(product => product.product_name.toLowerCase().includes(searchProduct.toLowerCase()))
+    }else{
+        products = ProductList
     }
 
     const addProduct = (product) =>{
@@ -43,6 +57,7 @@ const Product = ({
                     ) )}
                 </tbody>
             </table>
+            {ProductList.length === 0 && <p>No hay productos</p>}
         </div>
     )
 }

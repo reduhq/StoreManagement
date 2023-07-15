@@ -1,6 +1,6 @@
 
 const AddProductList = ({
-    products,
+    productList,
     setAddProduct,
     setRemoveProduct
 }) =>{
@@ -23,7 +23,7 @@ const AddProductList = ({
                 </thead>
 
                 <tbody>
-                    {products.map( (product) =>(
+                    {productList.map( (product) =>(
                         <tr key={product.id}>
                             <td>{product.product_name}</td>
                             <td>{product.price}</td>
@@ -33,6 +33,7 @@ const AddProductList = ({
                     ) )}
                 </tbody>
             </table>
+            {productList.length === 0 && <p>No se han agregado productos</p>}
         </>
     )
 }
